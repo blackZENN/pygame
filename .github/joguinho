@@ -1,0 +1,42 @@
+import pygame
+import random
+
+pygame.init()
+
+# Configurações da janela do jogo
+janela_largura = 640
+janela_altura = 480
+janela_titulo = "Adivinhe o número!"
+
+# Inicializa a janela
+janela = pygame.display.set_mode((janela_largura, janela_altura))
+pygame.display.set_caption(janela_titulo)
+
+# Gera um número aleatório entre 1 e 100
+numero_secreto = random.randint(1, 100)
+
+# Loop principal do jogo
+while True:
+    # Processa eventos do jogo
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+    
+    # Limpa a tela do jogo
+    janela.fill((255, 255, 255))
+    
+    # Desenha o título do jogo na tela
+    fonte_titulo = pygame.font.SysFont(None, 50)
+    texto_titulo = fonte_titulo.render(janela_titulo, True, (0, 0, 0))
+    janela.blit(texto_titulo, (janela_largura//2 - texto_titulo.get_width()//2, 50))
+    
+    # Desenha o campo de texto para o usuário digitar o número
+    fonte_texto = pygame.font.SysFont(None, 30)
+    texto_input = fonte_texto.render("Digite um número entre 1 e 100:", True, (0, 0, 0))
+    janela.blit(texto_input, (50, 150))
+    input_box = pygame.Rect(50, 200, 200, 32)
+    pygame.draw.rect(janela, (0, 0, 0), input_box, 2)
+    
+    # Atualiza a tela do jogo
+    pygame.display.update()
